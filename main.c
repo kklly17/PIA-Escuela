@@ -21,9 +21,8 @@ main()
 					printf("No se puede acceder al archivo");
 				else
 				{
-					struct datosAlumnos alumno;
 					
-					alumnos(archivoptr,&alumno);
+					alumnos(archivoptr);
 					fclose(archivoptr);
 				}
 				break;

@@ -1,19 +1,39 @@
 #include <stdio.h>
-//#include "validaciones.h"
+#include <windows.h>
+#include "validaciones.h"
 #include "Estructuras.h"
 
-void alumnos (FILE *, struct datosAlumnos *ptralumno);
+void alumnos (FILE *);
+void imprimir_error(const char* mensaje);
 
 
-void alumnos(FILE *f_archivoptr, struct datosAlumnos *ptralumno)
+void imprimir_error(const char* mensaje) 
 {
-	//struct datosAlumnos alumno;
-	//struct datosAlumnos *ptralumno;
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+
+    SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_INTENSITY);
+    
+    printf("\a %s",mensaje);
+    
+    SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+}
+
+void alumnos(FILE *f_archivoptr)
+{
+	struct datosAlumnos alumno, *ptralumno;
+	char *mensaje[50];
+
+	ptralumno = &alumno;
 	
-	//ptralumno = &alumno;
+	do
+	{
+		printf("\n1) Ingrese la matricula: ");
+		scanf("%d", &ptralumno->matricula);
+		if(ptralumno->matricula <= 0)
+			imprimir_error("Error. Matricula invalida");
+	}while(ptralumno->matricula <= 0);
 	
-	printf("Ingrese la matricula: ");
-	scanf("%d", &ptralumno->matricula);
+		
+
 	
-	printf("\nla matricula es: %d ",ptralumno->matricula);
 }
