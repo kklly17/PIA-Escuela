@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "funciones.h"
+#include "Estructuras.h"
 
 void menu(int*);
 
@@ -15,7 +17,15 @@ main()
 		switch(opcion)
 		{
 			case 1:
-				//if((archivoptr = fopen("")))
+				if((archivoptr = fopen("alumnos.dat","r+")) == NULL)
+					printf("No se puede acceder al archivo");
+				else
+				{
+					struct datosAlumnos alumno;
+					
+					alumnos(archivoptr,&alumno);
+					fclose(archivoptr);
+				}
 				break;
 		}
 		

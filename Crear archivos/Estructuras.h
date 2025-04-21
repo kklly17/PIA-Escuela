@@ -30,7 +30,6 @@ struct datosProfes
 {
 	int ID_empleado;
 	int coordinacion;
-	
 	int clave_materia[10];
 	char telefono[11];
 	char nombre[50];
