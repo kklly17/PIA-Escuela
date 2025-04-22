@@ -8,48 +8,6 @@ bool bisiesto(int);
 bool verificarCorreo(char *);
 bool verificarTelefono(char *);
 
-main() 
-{
-    int dia, mes, anio;
-    char correo[100], telefono[50];  
-
-    // Ingresar fecha (DD/MM/AAAA)
-    do 
-	{
-    	printf("Fecha de nacimiento: ");
-        scanf("%d/%d/%d", &dia, &mes, &anio);
-    } while(!verificarFecha(dia, mes, anio));
-
-    do
-    {
-    	printf("\nCorreo: "); 
-    	fflush(stdin);
-    	gets(correo);
-    	if(!verificarCorreo(correo))
-    	{
-    		printf("Correo invalido\n");
-		}
-	} while(!verificarCorreo(correo));
-
-    do
-    {
-        printf("\nTelefono: ");
-        fgets(telefono, sizeof(telefono), stdin);
-        
-		size_t len = strlen(telefono);
-        if (len > 0 && telefono[len - 1] == '\n') 
-        {
-            telefono[len - 1] = '\0'; 
-        }
-		
-		 if (!verificarTelefono(telefono))
-        {
-            printf("Telefono invalido\n");
-        }
-    } while (!verificarTelefono(telefono));
-
-}
-
 bool verificarFecha(int dia, int mes, int anio) 
 {
     bool validar = true;
