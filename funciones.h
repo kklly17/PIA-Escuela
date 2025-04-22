@@ -32,8 +32,42 @@ void alumnos(FILE *f_archivoptr)
 		if(ptralumno->matricula <= 0)
 			imprimir_error("Error. Matricula invalida");
 	}while(ptralumno->matricula <= 0);
-	
-		
 
-	
+	do
+	{
+		printf("\n1) Ingrese su fecha: ");
+		scanf("%d%d%d", &ptralumno->fecha_nacimiento.dia, &ptralumno->fecha_nacimiento.mes, &ptralumno->fecha_nacimiento.anio);
+		if(!verificarFecha(ptralumno->fecha_nacimiento.dia, ptralumno->fecha_nacimiento.mes, ptralumno->fecha_nacimiento.anio))
+		{
+			imprimir_error("Error. Fecha invalida");
+		}
+	}while(!verificarFecha(ptralumno->fecha_nacimiento.dia, ptralumno->fecha_nacimiento.mes, ptralumno->fecha_nacimiento.anio);
+
+	do
+	{
+		printf("\n1) Ingrese el correo: ");
+		fgets(ptralumno->correo, sizeof(ptralumno->correo), stdin);
+		size_t len = strlen(ptralumno->correo);
+		if (len > 0 && ptralumno->correo[len - 1] == '\n') 
+		{
+        		ptralumno->correo[len - 1] = '\0';
+    		}
+		if(!verificarCorreo(ptralumno->correo))
+			imprimir_error("Error. Correo invalido");
+	}while(!verificarCorreo(ptralumno->correo);
+		
+	do
+	{
+		printf("\n1) Ingrese su telefono: ");
+		fgets(ptralumno->telefono, sizeof(ptralumno->telefono), stdin);
+		size_t len = strlen(ptralumno->telefono);
+		if (len > 0 && ptralumno->telefono[len - 1] == '\n') 
+		{
+        		ptralumno->telefono[len - 1] = '\0';
+    		}
+		if(!verificarTelefono(ptralumno->telefono))
+			imprimir_error("Error. Telefono invalido");
+	}while(!verificarTelefono(ptralumno->telefono);
+
+
 }
