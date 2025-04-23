@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <windows.h>
+#include <string.h>
 #include "validaciones.h"
 #include "Estructuras.h"
 
@@ -21,7 +22,6 @@ void imprimir_error(const char* mensaje)
 void alumnos(FILE *f_archivoptr)
 {
 	struct datosAlumnos alumno, *ptralumno;
-	char *mensaje[50];
 
 	ptralumno = &alumno;
 	
@@ -29,12 +29,13 @@ void alumnos(FILE *f_archivoptr)
 	{
 		printf("\n1) Ingrese la matricula: ");
 		scanf("%d", &ptralumno->matricula);
-		if(ptralumno->matricula <= 0)
-			imprimir_error("Error. Matricula invalida");
-	}while(ptralumno->matricula <= 0);
-
+		if(ptralumno->matricula <= 0 || ptralumno->matricula > 100) 
+			imprimir_error("--Matricula invalida (0 - 100)--");
+	}while(ptralumno->matricula <= 0 || ptralumno->matricula > 100);
+	
 	do
 	{
+<<<<<<< Updated upstream
 		printf("\n1) Ingrese su fecha: ");
 		scanf("%d%d%d", &ptralumno->fecha_nacimiento.dia, &ptralumno->fecha_nacimiento.mes, &ptralumno->fecha_nacimiento.anio);
 		if(!verificarFecha(ptralumno->fecha_nacimiento.dia, ptralumno->fecha_nacimiento.mes, ptralumno->fecha_nacimiento.anio))
@@ -70,4 +71,32 @@ void alumnos(FILE *f_archivoptr)
 	}while(!verificarTelefono(ptralumno->telefono));
 
 
+=======
+		printf("\n2) Nombre: ");
+		fflush(stdin);
+		gets(ptralumno->nombre);
+		if(!(verificarNombre(ptralumno->nombre)))
+			imprimir_error("--Solo debe contener letras y espacios--");
+	}while(!(verificarNombre(ptralumno->nombre)));
+	
+	printf("\n3) Carrera: ");
+	printf("\n*********************************************************\n");
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_INTENSITY);
+	printf("\t\t--LISTADO DE CARRERAS--\n");
+	SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+	printf("%-40s%-30s\n%-40s%-30s\n%-30s%-30s","LMAD - Multimedia y animacion D.","LA - Actuaria",
+	"LCC - C. Computacionales","LF - Fisica", "LM - Matematicas", "LSTI - Seguridad en TI");
+	printf("\n*********************************************************\n");
+	do
+	{
+		printf("\nIngrese la carrera: ");
+		fflush(stdin);
+		gets(ptralumno->carrera);
+		if(!(verificarCarrera(ptralumno->carrera)))
+			imprimir_error("--Carrera invalida--");
+	}while(!(verificarCarrera(ptralumno->carrera)));
+	
+	
+>>>>>>> Stashed changes
 }
