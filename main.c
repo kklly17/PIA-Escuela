@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <windows.h>
 #include "funciones.h"
-#include "Estructuras.h"
+
 
 void menu(int*);
 
@@ -21,7 +22,6 @@ main()
 					printf("No se puede acceder al archivo");
 				else
 				{
-					
 					alumnos(archivoptr);
 					fclose(archivoptr);
 				}
@@ -37,7 +37,11 @@ void menu(int *opcion)
 {
 	do
 	{
-		printf("\n\t\t\tMENU PRINCIPAL");
+		
+		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    	SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE|  FOREGROUND_INTENSITY );
+    	printf("\n\t\t\tMENU PRINCIPAL");
+    	SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE );
 		printf("\n\t============================================");
 		printf("\n\t\t[1] Alumnos");
 		printf("\n\t\t[2] Profesor");
@@ -53,7 +57,7 @@ void menu(int *opcion)
 		if(*opcion < 1 || *opcion > 8)
 		{
 			system("cls");
-			printf("\n\t\tOpcion invalida. Intente de nuevo\n");
+			imprimir_error("\n\t   ** Opcion invalida. Intente de nuevo **\n");
 		}
 	}while(*opcion < 1 || *opcion > 8);	
 }

@@ -32,46 +32,8 @@ void alumnos(FILE *f_archivoptr)
 		if(ptralumno->matricula <= 0 || ptralumno->matricula > 100) 
 			imprimir_error("--Matricula invalida (0 - 100)--");
 	}while(ptralumno->matricula <= 0 || ptralumno->matricula > 100);
-	
 	do
 	{
-<<<<<<< Updated upstream
-		printf("\n1) Ingrese su fecha: ");
-		scanf("%d%d%d", &ptralumno->fecha_nacimiento.dia, &ptralumno->fecha_nacimiento.mes, &ptralumno->fecha_nacimiento.anio);
-		if(!verificarFecha(ptralumno->fecha_nacimiento.dia, ptralumno->fecha_nacimiento.mes, ptralumno->fecha_nacimiento.anio))
-		{
-			imprimir_error("Error. Fecha invalida");
-		}
-	}while(!verificarFecha(ptralumno->fecha_nacimiento.dia, ptralumno->fecha_nacimiento.mes, ptralumno->fecha_nacimiento.anio));
-
-	do
-	{
-		printf("\n1) Ingrese el correo: ");
-		fgets(ptralumno->correo, sizeof(ptralumno->correo), stdin);
-		size_t len = strlen(ptralumno->correo);
-		if (len > 0 && ptralumno->correo[len - 1] == '\n') 
-		{
-        		ptralumno->correo[len - 1] = '\0';
-    		}
-		if(!verificarCorreo(ptralumno->correo))
-			imprimir_error("Error. Correo invalido");
-	}while(!verificarCorreo(ptralumno->correo));
-		
-	do
-	{
-		printf("\n1) Ingrese su telefono: ");
-		fgets(ptralumno->telefono, sizeof(ptralumno->telefono), stdin);
-		size_t len = strlen(ptralumno->telefono);
-		if (len > 0 && ptralumno->telefono[len - 1] == '\n') 
-		{
-        		ptralumno->telefono[len - 1] = '\0';
-    		}
-		if(!verificarTelefono(ptralumno->telefono))
-			imprimir_error("Error. Telefono invalido");
-	}while(!verificarTelefono(ptralumno->telefono));
-
-
-=======
 		printf("\n2) Nombre: ");
 		fflush(stdin);
 		gets(ptralumno->nombre);
@@ -96,7 +58,48 @@ void alumnos(FILE *f_archivoptr)
 		if(!(verificarCarrera(ptralumno->carrera)))
 			imprimir_error("--Carrera invalida--");
 	}while(!(verificarCarrera(ptralumno->carrera)));
+
+	do
+	{
+		printf("\n4) Semestre: ");
+		scanf("%d",&ptralumno->semestre);
+		if(ptralumno->semestre <= 0 || ptralumno->semestre > 10)
+			imprimir_error("--Semestre Invalido (1-10)--");
+	}while(ptralumno->semestre <= 0 || ptralumno->semestre > 10);
 	
-	
->>>>>>> Stashed changes
+	do
+	{
+		printf("\n5) Fecha de nacimiento: ");
+		printf("\n\tDia: "); 
+		scanf("%d",&ptralumno->fecha_nacimiento.dia);
+		printf("\n\tMes: ");
+		scanf("%d",&ptralumno->fecha_nacimiento.mes);
+		printf("\n\tA%co: ",164); 
+		scanf("%d",&ptralumno->fecha_nacimiento.anio);
+		if(!(verificarFecha(ptralumno->fecha_nacimiento.dia, ptralumno->fecha_nacimiento.mes, ptralumno->fecha_nacimiento.anio)))
+			imprimir_error("--Fecha invalida--");
+	}while(!(verificarFecha(ptralumno->fecha_nacimiento.dia, ptralumno->fecha_nacimiento.mes, ptralumno->fecha_nacimiento.anio)));
+
+	do
+	{
+		printf("\n6) Correo: ");
+		fflush(stdin);
+		gets(ptralumno->correo);
+		/*size_t len = strlen(ptralumno->correo);
+		if (len > 0 && ptralumno->correo[len - 1] == '\n') 
+        		ptralumno->correo[len - 1] = '\0'; */
+		if(!(verificarCorreo(ptralumno->correo)))
+			imprimir_error("--Correo invalido--");
+	}while(!(verificarCorreo(ptralumno->correo)));
+		
+	do
+	{
+		printf("\n7) Ingrese su telefono: ");
+		fflush(stdin);
+		gets(ptralumno->telefono);
+		if(!(verificarTelefono(ptralumno->telefono)))
+			imprimir_error("--Telefono invalido--");
+	}while(!(verificarTelefono(ptralumno->telefono)));
+
 }
+

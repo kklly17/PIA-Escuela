@@ -7,13 +7,15 @@ bool verificarFecha(int, int, int);
 bool bisiesto(int);
 bool verificarCorreo(char *);
 bool verificarTelefono(char *);
+bool verificarNombre(char *);
+bool verificarCarrera(char *);
 
 bool verificarFecha(int dia, int mes, int anio) 
 {
     bool validar = true;
     int DiasMeses[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
     
-     if (anio < 1900 || anio >= 2025) 
+     if (anio < 1900 || anio >= 2010) 
 	{
         validar = false;
         printf("El anio no existe\n");
@@ -45,18 +47,16 @@ bool bisiesto(int anio)
 
 bool verificarCorreo(char *correo)
 {
-    int arroba = 0;
-    int i;
+    int arroba = 0, i = 0; 
     char *ultimoPunto = strrchr(correo, '.');
+    bool validar = true;
 
     for (i = 0; correo[i] != '\0'; i++)
     {
         char c = correo[i];
 
         if (!((c >= 65 && c <= 90) || (c >= 97 && c <= 122) || (c >= 48 && c <= 57) || c == 46 || c == 45 || c == 95 || c == 64))
-        {
-            return false;
-        }
+            validar = false;
 
         if (c == 64)
         {
@@ -66,58 +66,72 @@ bool verificarCorreo(char *correo)
         }
 
         if (c == 46 && arroba == 0 && i == 0)
-        {
-            return false;
-        }
+            validar = false;
     }
 
     if (arroba != 1)
-    {
-        return false;
-    }
+        validar = false;
 
     if (ultimoPunto == NULL || strlen(ultimoPunto) < 3)
-    {
-        return false;
-    }
+        validar = false;
 
-    return true;
+    return validar;
 }
 
 bool verificarTelefono(char *telefono)
 {
-    int i = 0;
-    int digitos = 0;
+    int i = 0, digitos = 0;
+    bool verificar = true;
 
     if (telefono[0] == '+') 
-    {
         i = 1;
-    }
-
+        
     while (telefono[i] != '\0') 
     {
-        char c = telefono[i];
-
-        if (c >= 48 && c <= 57) 
-        {
-            digitos++;
-        }
-        else if (c == 32 || c == 45) 
-        {
-            
-        }
-        else 
-        {
-            return false; 
-        }
-
+        if(isdigit(telefono[i]))
+			digitos++; 
+		else if (telefono[i] != 32 && telefono[i] != '-')
+             verificar = false;
         i++;
     }
+    if (digitos < 10 || digitos > 12) 
+        verificar = false;
 
-    if (digitos < 7 || digitos > 10) 
-    {
-        return false;
-    }
+    return verificar;
+}
 
-    return true;
+bool verificarNombre(char *nombrePTR)
+{
+	int i = 0;
+	int longitud = strlen(nombrePTR);
+	bool validar = true;
+	
+	while(*(nombrePTR + i) != '\0')
+	{
+		if(longitud = 1 &&*(nombrePTR + 0) == 32)
+			validar = false;
+		  
+		if(!(*(nombrePTR + i) >= 65 && *(nombrePTR + i) <= 90 || *(nombrePTR + i) >= 97 && *(nombrePTR + i) <= 122 || *(nombrePTR + i) == 32))
+		 	validar = false;
+		i++;
+	}
+	return validar;
+}
+
+bool verificarCarrera(char *carreraPTR)
+{
+	bool validar = true;
+	int i = 0;
+	
+	while(carreraPTR[i] != '\0')
+	{
+		if(carreraPTR[i] >= 97 && carreraPTR[i] <= 122)
+			carreraPTR[i] -=32;
+		i++;
+	}
+	
+	if(!(strcmp(carreraPTR,"LMAD") == 0 || strcmp(carreraPTR,"LA") == 0 || strcmp(carreraPTR,"LCC") == 0
+		|| strcmp(carreraPTR,"LF") == 0 || strcmp(carreraPTR,"LM") == 0 || strcmp(carreraPTR,"LSTI") == 0))
+		validar = false;
+	return validar;	
 }
