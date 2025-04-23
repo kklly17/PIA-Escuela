@@ -41,7 +41,7 @@ void alumnos(FILE *f_archivoptr)
 		{
 			imprimir_error("Error. Fecha invalida");
 		}
-	}while(!verificarFecha(ptralumno->fecha_nacimiento.dia, ptralumno->fecha_nacimiento.mes, ptralumno->fecha_nacimiento.anio);
+	}while(!verificarFecha(ptralumno->fecha_nacimiento.dia, ptralumno->fecha_nacimiento.mes, ptralumno->fecha_nacimiento.anio));
 
 	do
 	{
@@ -54,7 +54,7 @@ void alumnos(FILE *f_archivoptr)
     		}
 		if(!verificarCorreo(ptralumno->correo))
 			imprimir_error("Error. Correo invalido");
-	}while(!verificarCorreo(ptralumno->correo);
+	}while(!verificarCorreo(ptralumno->correo));
 		
 	do
 	{
@@ -67,7 +67,7 @@ void alumnos(FILE *f_archivoptr)
     		}
 		if(!verificarTelefono(ptralumno->telefono))
 			imprimir_error("Error. Telefono invalido");
-	}while(!verificarTelefono(ptralumno->telefono);
+	}while(!verificarTelefono(ptralumno->telefono));
 
 
 }
