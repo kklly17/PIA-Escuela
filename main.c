@@ -4,7 +4,7 @@
 #include "funciones.h"
 
 
-void menu(int*);
+void menu(int *);
 
 main()
 {
@@ -19,13 +19,36 @@ main()
 		{
 			case 1:
 				if((archivoptr = fopen("alumnos.dat","r+")) == NULL)
-					printf("No se puede acceder al archivo");
+					imprimir_error("No se puede acceder al archivo");
 				else
 				{
 					alumnos(archivoptr);
 					fclose(archivoptr);
 				}
+				//system("cls");
 				break;
+				
+			case 2: 
+				if((archivoptr = fopen("profesores.dat","r+")) == NULL)
+					imprimir_error("No se puede acceder al archivo");
+				else
+				{
+					profesores(archivoptr);
+					fclose(archivoptr);
+				}
+				break;
+				
+			case 3: 
+				if((archivoptr = fopen("materias.dat", "r+")) == NULL)
+					imprimir_error("No se puede acceder al archivo");
+				else
+				{
+					materias(archivoptr);
+					fclose(archivoptr);
+				}
+				break;
+			
+			
 		}
 		
 		menu(&opcion);
@@ -33,7 +56,7 @@ main()
 
 }
 
-void menu(int *opcion)
+void menu(int *opcionptr)
 {
 	do
 	{
@@ -52,12 +75,12 @@ void menu(int *opcion)
 		printf("\n\t\t[7] Reportes");
 		printf("\n\t\t[8] Salir");
 		printf("\n\t   Elija una opcion: ");
-		scanf("%d",opcion);
-		printf("\t---------------------------------------------");
-		if(*opcion < 1 || *opcion > 8)
+		scanf("%d",opcionptr);
+		printf("\t---------------------------------------------\n");
+		if(*opcionptr < 1 || *opcionptr > 8)
 		{
 			system("cls");
 			imprimir_error("\n\t   ** Opcion invalida. Intente de nuevo **\n");
 		}
-	}while(*opcion < 1 || *opcion > 8);	
+	}while(*opcionptr < 1 || *opcionptr > 8);	
 }

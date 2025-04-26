@@ -7,7 +7,7 @@ main()
 	struct datosAlumnos blankalumnos = {0,0,"","","",0.0,"","","","",0,0,0,0};
 	FILE *ptrarchivo;
 	
-	if((ptrarchivo = fopen("alumnos.dat","w"))==NULL)
+	if((ptrarchivo = fopen("alumnos.dat","w")) == NULL)
 		printf("Error. El archivo no se puede crear");
 	else
 	{

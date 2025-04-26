@@ -4,7 +4,7 @@
 
 struct direccion
 {
-	char calle[30], colonia[30], municipio[30], estado[30];
+	char calle[50], colonia[50], municipio[50], estado[50];
 	int numero;
 };
 
@@ -17,10 +17,10 @@ struct datosAlumnos
 {
 	int matricula;
 	int semestre;
-	char telefono[11];
-	char nombre[50];
+	char telefono[15];
+	char nombre[60];
 	char carrera[10];
-	char correo[50];
+	char correo[60];
 	float promedio[10];
 	struct direccion dir;
 	struct fecha fecha_nacimiento;
@@ -31,9 +31,9 @@ struct datosProfes
 	int ID_empleado;
 	int coordinacion;
 	int clave_materia[10];
-	char telefono[11];
-	char nombre[50];
-	char correo[50];
+	char telefono[15];
+	char nombre[60];
+	char correo[60];
 	struct direccion dir;
 	struct fecha fecha_nacimiento;
 };

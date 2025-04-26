@@ -9,13 +9,15 @@ bool verificarCorreo(char *);
 bool verificarTelefono(char *);
 bool verificarNombre(char *);
 bool verificarCarrera(char *);
+bool verificarDescripcion(char *);
+
 
 bool verificarFecha(int dia, int mes, int anio) 
 {
     bool validar = true;
     int DiasMeses[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
     
-     if (anio < 1900 || anio >= 2010) 
+     if (anio < 1950 || anio >= 2010) 
 	{
         validar = false;
         printf("El anio no existe\n");
@@ -27,9 +29,7 @@ bool verificarFecha(int dia, int mes, int anio)
         printf("El mes no existe\n");
     }
     if (mes == 2 && bisiesto(anio))
-    {
     	DiasMeses[1] = 29;
-	}
 
     if (dia < 1 || dia > DiasMeses[mes - 1]) 
 	{
@@ -102,8 +102,7 @@ bool verificarTelefono(char *telefono)
 
 bool verificarNombre(char *nombrePTR)
 {
-	int i = 0;
-	int longitud = strlen(nombrePTR);
+	int i = 0, longitud = strlen(nombrePTR);
 	bool validar = true;
 	
 	while(*(nombrePTR + i) != '\0')
@@ -134,4 +133,23 @@ bool verificarCarrera(char *carreraPTR)
 		|| strcmp(carreraPTR,"LF") == 0 || strcmp(carreraPTR,"LM") == 0 || strcmp(carreraPTR,"LSTI") == 0))
 		validar = false;
 	return validar;	
+}
+
+bool verificarDescripcion(char *descripcionPTR)
+{
+	int i = 0, longitud = strlen(descripcionPTR);
+	bool validar = true;
+	
+	while(*(descripcionPTR + i) != '\0')
+	{
+		if(longitud = 1 && *(descripcionPTR + 0) == 32)
+			validar = false;
+		  
+		if(!(*(descripcionPTR + i) >= 65 && *(descripcionPTR + i) <= 90 || *(descripcionPTR + i) >= 97 && *(descripcionPTR + i) <= 122 
+		|| *(descripcionPTR + i) == 32 || *(descripcionPTR + i) >= 48 && *(descripcionPTR + i) <= 57 || *(descripcionPTR + i) == 46
+		|| *(descripcionPTR + i) == 44))
+		 	validar = false;
+		i++;
+	}
+	return validar;
 }
