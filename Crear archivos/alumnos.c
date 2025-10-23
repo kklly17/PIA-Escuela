@@ -4,7 +4,7 @@
 main()
 {
 	int i;
-	struct datosAlumnos blankalumnos = {0,0,"","","",0.0,"","","","",0,0,0,0};
+	struct datosAlumnos blankalumnos = {0,0,"","","","",0.0,"","","","",0,0,0,0};
 	FILE *ptrarchivo;
 	
 	if((ptrarchivo = fopen("alumnos.dat","w")) == NULL)

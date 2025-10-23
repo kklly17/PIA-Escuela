@@ -2,6 +2,7 @@
 #include <stdbool.h>
 #include <string.h>
 #include <ctype.h>
+#include "Estructuras.h"
 
 bool verificarFecha(int, int, int);
 bool bisiesto(int);
@@ -10,6 +11,10 @@ bool verificarTelefono(char *);
 bool verificarNombre(char *);
 bool verificarCarrera(char *);
 bool verificarDescripcion(char *);
+bool verificarMateria(int *);
+bool verificarProfesor(int *);
+bool verificarMat_Profe(int *, int*);
+bool verificarGrupo(int *);
 
 
 bool verificarFecha(int dia, int mes, int anio) 
@@ -153,3 +158,90 @@ bool verificarDescripcion(char *descripcionPTR)
 	}
 	return validar;
 }
+
+bool verificarMateria(int *clave_auxPTR)
+{
+	FILE *materiasptr;
+	struct datosMaterias materia;
+	bool validar = true;
+	
+	if((materiasptr = fopen("materias.dat", "r")) == NULL)
+		printf("--No se puede acceder a el archivo--");
+	else
+	{
+		fseek(materiasptr, (*(clave_auxPTR) - 1) * sizeof(struct datosMaterias), SEEK_SET);
+		fread(&materia, sizeof(struct datosMaterias), 1, materiasptr);
+		if(materia.clave_materia == 0)
+			validar = false;
+		
+		fclose(materiasptr);
+	}
+	return validar;
+}
+
+bool verificarProfesor(int *id_auxPTR)
+{
+	FILE *profesptr;
+	struct datosProfes profe;
+	bool validar = true;
+	
+	if((profesptr = fopen("profesores.dat", "r")) == NULL)
+		printf("--No se puede acceder a el archivo--");
+	else
+	{
+		fseek(profesptr, (*(id_auxPTR) - 1) * sizeof(struct datosProfes), SEEK_SET);
+		fread(&profe, sizeof(struct datosProfes), 1, profesptr);
+		if(profe.ID_empleado == 0)
+			validar = false;
+		
+		fclose(profesptr);
+	}
+	return validar;
+}
+
+bool verificarMat_Profe(int *materia_auxPTR, int *id_auxPTR)
+{
+	FILE *profesptr;
+	struct datosProfes profe;
+	int i = 0;
+	bool  encontrado = false;
+	
+	if((profesptr = fopen("profesores.dat", "r")) == NULL)
+		printf("--No se puede acceder a el archivo--");
+	else
+	{
+		fseek(profesptr, (*(id_auxPTR) - 1) * sizeof(struct datosProfes), SEEK_SET);
+		fread(&profe, sizeof(struct datosProfes), 1, profesptr);
+		
+		while(!encontrado && i < 10)
+		{
+			if(profe.clave_materia[i] == *(materia_auxPTR))
+				encontrado = true;
+			i++;
+		}
+		
+		fclose(profesptr);
+	}
+	return encontrado;
+}
+
+bool verificarGrupo(int *grupoptr)
+{
+	FILE *gruposfile;
+	struct datosGrupos grupo;
+	bool validar = true;
+	
+	if((gruposfile = fopen("grupos.dat", "r")) == NULL)
+			printf("No se puede acceder al archivo");
+	else
+	{
+		fseek(gruposfile, (*(grupoptr) - 1) * sizeof(struct datosGrupos), SEEK_SET);
+		fread(&grupo, sizeof(struct datosGrupos), 1, gruposfile);
+		if(grupo.clave_grupo != *grupoptr)
+			validar = false;
+		fclose(gruposfile);
+	}
+				
+	return validar;
+}
+

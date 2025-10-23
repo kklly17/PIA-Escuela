@@ -21,7 +21,7 @@ struct datosAlumnos
 	char nombre[60];
 	char carrera[10];
 	char correo[60];
-	float promedio[10];
+	float promedio;
 	struct direccion dir;
 	struct fecha fecha_nacimiento;
 };
@@ -63,5 +63,9 @@ struct datosInscripcion
 	int matricula;
 	int clave_grupo;
 	struct fecha f_actual;
+};
+
+struct folio{
+	int contFolio;
 };
 #endif

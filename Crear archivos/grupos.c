@@ -4,7 +4,7 @@
 main()
 {
 	int i;
-	struct datosGrupos blankgrupos = {0,0,{0},{0},0,0,0,0,0};
+	struct datosGrupos blankgrupos = {0,0,0,0,0,0,0,0,0};
 	FILE *ptrarchivo;
 	
 	if((ptrarchivo = fopen("grupos.dat","w"))==NULL)
@@ -13,7 +13,8 @@ main()
 	{
 		for(i = 0; i < 20; i++)
 			fwrite(&blankgrupos, sizeof(struct datosGrupos), 1, ptrarchivo);
-		fclose(ptrarchivo);
+			
+		fclose(ptrarchivo);	
 		printf("Archivo creado con exito!!");
 	}
 }
